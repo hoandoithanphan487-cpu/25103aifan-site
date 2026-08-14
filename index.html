@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>冯一帆 - 用考古研究方法，做有依据的 AI 视觉叙事</title>
+  <meta name="description" content="冯一帆的个人网站：以美术考古研究、视觉传达设计与 AI 创作为基础，将复杂的文化内容转化为清晰、有吸引力的视觉叙事。">
+  <meta name="theme-color" content="#080a0f">
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    :root {
+      --bg: #080a0f;
+      --bg-soft: #10131b;
+      --text: rgba(255, 255, 255, 0.96);
+      --text-soft: rgba(255, 255, 255, 0.72);
+      --text-faint: rgba(255, 255, 255, 0.5);
+      --line: rgba(255, 255, 255, 0.13);
+      --glass: rgba(255, 255, 255, 0.055);
+      --max-width: 1240px;
+      --page-pad: clamp(20px, 5vw, 72px);
+      --radius: 32px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 18% 24%, rgba(255, 255, 255, 0.1), transparent 34%),
+        radial-gradient(ellipse at 78% 18%, rgba(162, 170, 176, 0.08), transparent 31%),
+        radial-gradient(ellipse at 62% 72%, rgba(255, 255, 255, 0.055), transparent 33%),
+        radial-gradient(ellipse at 16% 84%, rgba(124, 132, 137, 0.07), transparent 27%),
+        linear-gradient(145deg, #07090d 0%, #0d1018 48%, #07090d 100%);
+      animation: atmosphere 24s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom, rgba(4, 6, 10, 0.06), rgba(4, 6, 10, 0.28)),
+        repeating-linear-gradient(90deg, transparent 0, transparent calc(8.333vw - 1px), rgba(255, 255, 255, 0.018) 8.333vw);
+    }
+
+    @keyframes atmosphere {
+      0% { transform: scale(1) translate3d(-1%, -1%, 0); }
+      50% { transform: scale(1.05) translate3d(2%, 1%, 0); }
+      100% { transform: scale(1.08) translate3d(-1%, 2%, 0); }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      color: inherit;
+      font: inherit;
+    }
+
+    ::selection {
+      color: #0a0c10;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -60px;
+      z-index: 100;
+      padding: 10px 16px;
+      color: #0a0c10;
+      background: #fff;
+      border-radius: 999px;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      padding: max(18px, env(safe-area-inset-top)) var(--page-pad) 14px;
+    }
+
+    .nav-shell {
+      width: min(100%, var(--max-width));
+      min-height: 58px;
+      margin: 0 auto;
+      padding: 8px 10px 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      background: rgba(11, 13, 19, 0.44);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 14px 50px rgba(0, 0, 0, 0.15);
+      -webkit-backdrop-filter: blur(20px) saturate(120%);
+      backdrop-filter: blur(20px) saturate(120%);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      font-size: 15px;
+    }
+
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 2.5vw, 32px);
+      margin: 0;
+      padding: 0 14px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: var(--text-soft);
+      font-size: 13px;
+      white-space: nowrap;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -6px;
+      height: 1px;
+      background: #fff;
+      transition: right 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.is-active {
+      color: #fff;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after,
+    .nav-links a.is-active::after {
+      right: 0;
+    }
+
+    .menu-button {
+      display: none;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+    }
+
+    main {
+      overflow: clip;
+    }
+
+    .section {
+      width: min(100%, calc(var(--max-width) + var(--page-pad) * 2));
+      min-height: 86vh;
+      margin: 0 auto;
+      padding: clamp(110px, 15vw, 190px) var(--page-pad);
+      scroll-margin-top: 92px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 38px;
+      color: var(--text-faint);
+      font-size: 12px;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1, h2, h3 {
+      font-weight: 400;
+      line-height: 1.12;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin-bottom: 30px;
+      font-size: clamp(45px, 7.5vw, 104px);
+      letter-spacing: -0.055em;
+    }
+
+    h2 {
+      max-width: 900px;
+      margin-bottom: clamp(54px, 8vw, 100px);
+      font-size: clamp(34px, 5vw, 66px);
+      letter-spacing: -0.04em;
+    }
+
+    h3 {
+      margin-bottom: 18px;
+      font-size: clamp(22px, 2.5vw, 34px);
+      letter-spacing: -0.025em;
+    }
+
+    .hero {
+      min-height: 100svh;
+      padding-top: clamp(140px, 18vh, 210px);
+      padding-bottom: clamp(70px, 10vh, 120px);
+    }
+
+    .hero-layout {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      align-items: center;
+      gap: clamp(34px, 6vw, 86px);
+    }
+
+    .hero-layout h1 {
+      font-size: clamp(45px, 5.8vw, 82px);
+    }
+
+    .hero-visual-placeholder {
+      min-height: clamp(360px, 45vw, 600px);
+      background: #20242a;
+    }
+
+    .hero-name {
+      margin-bottom: 26px;
+      color: var(--text-soft);
+      font-size: 14px;
+      letter-spacing: 0.18em;
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      margin-bottom: 44px;
+      color: var(--text-soft);
+      font-size: clamp(16px, 1.7vw, 21px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 50px;
+      padding: 0 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.035);
+      transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    }
+
+    .button.primary {
+      color: #0b0d12;
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      color: #0b0d12;
+      background: #fff;
+    }
+
+    .hero-note {
+      margin-top: clamp(70px, 12vh, 130px);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text-faint);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-note::before {
+      content: "↓";
+      font-size: 16px;
+    }
+
+    .direction-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .direction-item {
+      min-height: 290px;
+      padding: 32px clamp(22px, 3vw, 42px) 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .direction-item + .direction-item {
+      border-left: 1px solid var(--line);
+    }
+
+    .direction-number {
+      color: var(--text-faint);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+
+    .direction-item p {
+      margin-bottom: 0;
+      color: var(--text-soft);
+      font-size: 15px;
+    }
+
+    .project-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.7fr);
+      gap: clamp(30px, 6vw, 78px);
+      align-items: end;
+    }
+
+    .placeholder {
+      position: relative;
+      min-height: clamp(360px, 55vw, 680px);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 24px;
+      background: #252a31;
+      color: rgba(255, 255, 255, 0.72);
+      text-align: center;
+    }
+
+    .placeholder::before,
+    .placeholder::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .placeholder::before {
+      width: 1px;
+      height: 140%;
+      transform: rotate(58deg);
+    }
+
+    .placeholder::after {
+      width: 140%;
+      height: 1px;
+      transform: rotate(32deg);
+    }
+
+    .placeholder span {
+      position: relative;
+      z-index: 1;
+      max-width: 310px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(15, 17, 22, 0.7);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .project-copy p {
+      color: var(--text-soft);
+    }
+
+    .project-status {
+      display: inline-block;
+      margin-bottom: 28px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text-faint);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .project-process {
+      margin: 30px 0 0;
+      padding: 22px 0 0;
+      border-top: 1px solid var(--line);
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    .approach-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: clamp(60px, 10vw, 130px);
+      align-items: start;
+    }
+
+    .statement {
+      max-width: 670px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 65px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+    }
+
+    .approach-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .approach-list li {
+      padding: 26px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .approach-list strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 17px;
+      font-weight: 400;
+    }
+
+    .approach-list span {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .method-line {
+      grid-column: 1 / -1;
+      margin-top: 24px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      color: var(--text-faint);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .contact-section {
+      min-height: auto;
+      padding-top: clamp(100px, 13vw, 160px);
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+    }
+
+    .glass-footer {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(34px, 6vw, 72px);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+        0 28px 90px rgba(0, 0, 0, 0.25);
+      -webkit-backdrop-filter: blur(24px) saturate(120%);
+      backdrop-filter: blur(24px) saturate(120%);
+    }
+
+    .glass-footer::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 12%;
+      width: 52%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.48), transparent);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: clamp(50px, 8vw, 110px);
+      padding-bottom: clamp(54px, 8vw, 90px);
+    }
+
+    .contact-lead h2 {
+      margin-bottom: 25px;
+    }
+
+    .contact-lead p {
+      max-width: 480px;
+      color: var(--text-soft);
+    }
+
+    .contact-cta {
+      margin-top: 32px;
+    }
+
+    .footer-groups {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .footer-group h3 {
+      margin-bottom: 22px;
+      color: var(--text-faint);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .footer-group ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .footer-group li + li {
+      margin-top: 12px;
+    }
+
+    .footer-group a,
+    .footer-group span {
+      color: var(--text-soft);
+      font-size: 14px;
+      transition: color 0.25s ease;
+    }
+
+    .footer-group a:hover,
+    .footer-group a:focus-visible {
+      color: #fff;
+    }
+
+    .contact-placeholder {
+      margin-top: 18px;
+      min-height: 180px;
+      border-radius: 18px;
+      background: #2a2e35;
+    }
+
+    .contact-placeholder span {
+      font-size: 12px;
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--text-faint);
+      font-size: 12px;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    :focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.9);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .direction-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .direction-item {
+        min-height: 220px;
+      }
+
+      .direction-item + .direction-item {
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+
+      .project-layout,
+      .approach-layout,
+      .footer-top,
+      .hero-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual-placeholder {
+        min-height: 420px;
+      }
+
+      .project-copy {
+        max-width: 620px;
+      }
+
+      .footer-groups {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --radius: 24px;
+      }
+
+      body::after {
+        background: linear-gradient(to bottom, rgba(4, 6, 10, 0.06), rgba(4, 6, 10, 0.25));
+      }
+
+      .site-header {
+        padding-top: max(12px, env(safe-area-inset-top));
+      }
+
+      .nav-shell {
+        position: relative;
+        min-height: 54px;
+        padding-left: 16px;
+        flex-wrap: wrap;
+      }
+
+      .js .nav-shell {
+        flex-wrap: nowrap;
+      }
+
+      .js .menu-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 4px 2px 2px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .js .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        padding: 14px;
+        display: grid;
+        gap: 2px;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 22px;
+        background: rgba(10, 12, 18, 0.9);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        -webkit-backdrop-filter: blur(24px);
+        backdrop-filter: blur(24px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      }
+
+      .js .nav-links.is-open {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .js .nav-links a {
+        display: block;
+        padding: 12px 10px;
+        font-size: 14px;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .section {
+        min-height: auto;
+        padding-top: 110px;
+        padding-bottom: 110px;
+      }
+
+      .hero {
+        min-height: 100svh;
+        padding-top: 150px;
+        padding-bottom: 58px;
+      }
+
+      .hero-visual-placeholder {
+        min-height: 360px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13.5vw, 68px);
+      }
+
+      h2 {
+        margin-bottom: 52px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .direction-item {
+        min-height: 205px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .project-layout {
+        align-items: start;
+      }
+
+      .placeholder {
+        min-height: 420px;
+      }
+
+      .footer-groups {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 44px;
+      }
+
+      .footer-group:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .footer-groups {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-group:last-child {
+        grid-column: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .js .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header" aria-label="网站导航">
+    <nav class="nav-shell" aria-label="主要导航">
+      <a class="brand" href="#top" aria-label="冯一帆，返回顶部">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>冯一帆</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">菜单</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#directions">合作方向</a></li>
+        <li><a href="#projects">精选实践</a></li>
+        <li><a href="#approach">为什么是我</a></li>
+        <li><a href="#contact">联系我</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="section hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-layout">
+        <div class="reveal">
+          <p class="hero-name">FENG YIFAN · AI VISUAL NARRATIVE</p>
+          <h1 id="hero-title">用考古研究方法，<br>做有依据的 AI 视觉叙事。</h1>
+          <p class="hero-copy">我把文化、艺术与历史中的复杂内容，转化为清晰、有吸引力的视觉表达。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">查看精选实践 <span aria-hidden="true">↘</span></a>
+            <a class="button" href="#contact">和我聊聊 <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="placeholder hero-visual-placeholder reveal" role="img" aria-label="首屏沉浸式 AI 动态视觉占位，建议桌面视频尺寸 1920 × 1080 像素，移动端静态封面 1080 × 1350 像素">
+          <span>这里放沉浸式 AI 动态视觉或代表性主视觉<br>建议桌面视频：1920 × 1080 px（16:9）<br>移动端静态封面：1080 × 1350 px（4:5）</span>
+        </div>
+      </div>
+      <p class="hero-note reveal">继续探索</p>
+    </section>
+
+    <section class="section" id="directions" aria-labelledby="directions-title">
+      <p class="section-label reveal">01 · What I Do</p>
+      <h2 id="directions-title" class="reveal">从研究开始，<br>让内容被看见。</h2>
+      <div class="direction-grid reveal">
+        <article class="direction-item">
+          <span class="direction-number">01</span>
+          <div>
+            <h3>文化主题<br>AI 视觉内容</h3>
+            <p>围绕文化、艺术与历史主题，完成从资料研究到视觉表达的内容创作。</p>
+          </div>
+        </article>
+        <article class="direction-item">
+          <span class="direction-number">02</span>
+          <div>
+            <h3>研究资料与<br>知识可视化</h3>
+            <p>梳理复杂信息与专业知识，把难懂的内容转化为清晰、易传播的视觉叙事。</p>
+          </div>
+        </article>
+        <article class="direction-item">
+          <span class="direction-number">03</span>
+          <div>
+            <h3>品牌、展览与<br>传播概念</h3>
+            <p>为文化项目与创意传播提供视觉方向、内容概念和 AI 辅助创作方案。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <p class="section-label reveal">02 · Selected Practice</p>
+      <h2 id="projects-title" class="reveal">不展示零散结果，<br>只记录完整思考。</h2>
+      <div class="project-layout">
+        <div class="placeholder reveal" role="img" aria-label="精选实践项目主视觉占位图，建议尺寸 1600 × 1000 像素">
+          <span>这里放「首个精选实践」的项目主视觉<br>建议尺寸：1600 × 1000 px（横版）</span>
+        </div>
+        <div class="project-copy reveal">
+          <span class="project-status">首个实践项目正在整理中</span>
+          <h3>一个主题，如何成为完整的视觉叙事？</h3>
+          <p>这里将呈现从资料研究、概念提炼到视觉实现的全过程，并说明 AI 如何参与，以及哪些关键判断由我完成。</p>
+          <p class="project-process">项目命题 → 研究发现 → 视觉策略 → AI 协作 → 最终成果</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach" aria-labelledby="approach-title">
+      <p class="section-label reveal">03 · Why Me</p>
+      <h2 id="approach-title" class="reveal">一种不只依赖工具的<br>创作方法。</h2>
+      <div class="approach-layout">
+        <p class="statement reveal">研究决定内容是否成立，设计决定内容能否被看见。</p>
+        <ul class="approach-list reveal">
+          <li>
+            <strong>美术考古</strong>
+            <span>河南大学研究生 · 美术考古、研究与图像分析</span>
+          </li>
+          <li>
+            <strong>视觉传达</strong>
+            <span>山东艺术学院本科 · 信息与视觉表达</span>
+          </li>
+          <li>
+            <strong>AI 创作</strong>
+            <span>探索新的生产方式与叙事可能</span>
+          </li>
+          <li>
+            <strong>真实协作经验</strong>
+            <span>学术助理与行政助理 · 研究、沟通与执行</span>
+          </li>
+        </ul>
+        <p class="method-line reveal">研究问题 → 提炼概念 → 建立视觉方向 → AI 协作生成 → 人工筛选与完善</p>
+      </div>
+    </section>
+
+    <footer>
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="glass-footer reveal">
+        <div class="footer-top">
+          <div class="contact-lead">
+            <p class="section-label">04 · Let’s Talk</p>
+            <h2 id="contact-title">让一个值得研究的主题，成为值得看见的作品。</h2>
+            <p>如果你正在寻找文化内容、视觉传播或 AI 创意方向的合作伙伴，欢迎联系我，聊聊你的项目。</p>
+            <a class="button primary contact-cta" href="#contact-ways">查看联系方式 <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="footer-groups" id="contact-ways">
+            <div class="footer-group">
+              <h3>合作方向</h3>
+              <ul>
+                <li><span>AI 视觉内容</span></li>
+                <li><span>文化主题创作</span></li>
+                <li><span>知识可视化</span></li>
+              </ul>
+            </div>
+            <div class="footer-group">
+              <h3>快速浏览</h3>
+              <ul>
+                <li><a href="#projects">精选实践</a></li>
+                <li><a href="#approach">工作方法</a></li>
+                <li><a href="#directions">合作方向</a></li>
+                <li><a href="#top">回到顶部</a></li>
+              </ul>
+            </div>
+            <div class="footer-group">
+              <h3>联系我</h3>
+              <ul>
+                <li><span>微信与邮箱信息待补充</span></li>
+              </ul>
+              <div class="placeholder contact-placeholder" role="img" aria-label="微信二维码占位图，建议尺寸 600 × 600 像素">
+                <span>这里放微信二维码<br>建议尺寸：600 × 600 px（正方形）</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© <span id="year"></span> 冯一帆 · FENG YIFAN</span>
+          <span>保持联系 · 期待有意义的合作</span>
+        </div>
+      </div>
+    </section>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const menuButton = document.querySelector('.menu-button');
+      const navLinks = document.querySelector('.nav-links');
+      const navAnchors = [...document.querySelectorAll('.nav-links a')];
+      const sections = [...document.querySelectorAll('section[id]')];
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      menuButton.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('is-open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.textContent = isOpen ? '关闭' : '菜单';
+      });
+
+      navAnchors.forEach((anchor) => {
+        anchor.addEventListener('click', () => {
+          navLinks.classList.remove('is-open');
+          menuButton.setAttribute('aria-expanded', 'false');
+          menuButton.textContent = '菜单';
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('.nav-shell')) {
+          navLinks.classList.remove('is-open');
+          menuButton.setAttribute('aria-expanded', 'false');
+          menuButton.textContent = '菜单';
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
+          navLinks.classList.remove('is-open');
+          menuButton.setAttribute('aria-expanded', 'false');
+          menuButton.textContent = '菜单';
+          menuButton.focus();
+        }
+      });
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach((element) => element.classList.add('is-visible'));
+      } else {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+        document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+      }
+
+      if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visible) return;
+          navAnchors.forEach((anchor) => {
+            const isCurrent = anchor.getAttribute('href') === `#${visible.target.id}`;
+            anchor.classList.toggle('is-active', isCurrent);
+            if (isCurrent) {
+              anchor.setAttribute('aria-current', 'location');
+            } else {
+              anchor.removeAttribute('aria-current');
+            }
+          });
+        }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.25, 0.5] });
+
+        sections.forEach((section) => sectionObserver.observe(section));
+      }
+    })();
+  </script>
+</body>
+</html>
