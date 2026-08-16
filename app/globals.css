@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/**
+ * Design tokens: warm paper, fine black ink, and two voices — a thin
+ * signature script for the emotional lines and a quiet editorial serif for
+ * everything that has to be read.
+ */
+@theme {
+  --color-paper: #f7f5f0;
+  --color-paper-deep: #f1ede4;
+  --color-ink: #171717;
+  --color-ink-soft: #4b4740;
+  --color-ink-faint: #8d887e;
+  --color-rule: #ded8cc;
+  --color-sea: #7b94a3;
+  --color-sand: #c7b598;
+
+  --font-hand: "Parisienne", "Snell Roundhand", "Apple Chancery", cursive;
+  --font-editorial:
+    "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  --font-editorial-cn:
+    "Noto Serif SC", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+
+  --ease-drift: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+:root {
+  /* Illustration line weight, kept in one place so every sketch matches. */
+  --sketch-stroke: 1.1;
+  --sketch-stroke-fine: 0.85;
+  /* Motion is slow on purpose; the page should feel alive, not animated. */
+  --drift-duration: 9s;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchored sections should not slide under the fixed masthead. */
+  scroll-padding-top: 6rem;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-sea) 26%, transparent);
+}
+
+/**
+ * Parisienne carries long ascenders and descenders. Reserving the room here
+ * keeps every handwritten line from being clipped by its own flourishes. It
+ * lives in the base layer so a `leading-*` utility can still win when a
+ * particular line genuinely needs to be tighter.
+ */
+@layer base {
+  .font-hand {
+    line-height: 1.24;
+    padding-block: 0.1em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
