@@ -36,7 +36,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/images/expressions/default-smile.png"
+          href={`${import.meta.env.BASE_URL}images/expressions/default-smile.png`}
           fetchPriority="high"
         />
       </head>
