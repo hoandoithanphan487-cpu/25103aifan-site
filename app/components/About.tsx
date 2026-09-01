@@ -11,16 +11,16 @@ import {
 /** Things I keep coming back to, in place of a list of things I have done. */
 const NOTES = [
   {
-    zh: "我会留意光，留意天气，也留意人们告别的方式。",
-    en: "I notice light, and weather, and the way people say goodbye.",
+    zh: "我关心模型能做什么，也会认真划定它不该替人决定的地方。",
+    en: "I care about what a model can do, and about the decisions it should leave to people.",
   },
   {
-    zh: "我宁愿开始得笨拙，也不愿一直没有开始。",
-    en: "I would rather begin badly than not begin at all.",
+    zh: "我喜欢把模糊想法拆成可以运行、测试和复盘的版本。",
+    en: "I like turning vague ideas into versions that can run, be tested, and be reconsidered.",
   },
   {
-    zh: "我还在决定自己是谁，并且已经决定，这是被允许的。",
-    en: "I am still deciding who I am, and I have decided that is allowed.",
+    zh: "网页、游戏、Prompt 或评测表，对我来说都是把想法落地的方法。",
+    en: "A website, a game, a prompt, or an evaluation sheet can all be ways of making an idea concrete.",
   },
 ] as const;
 
@@ -32,15 +32,15 @@ export function About() {
           <FadeIn>
             <SectionLabel>About</SectionLabel>
             <HandwrittenHeading className="mt-6 -ml-1">
-              the me of today
+              the me behind the work
             </HandwrittenHeading>
           </FadeIn>
 
           <FadeIn delay={0.08}>
             <BilingualPair
               className="mt-9"
-              zh="我从未把自己说清楚过——过一年再读，那些句子就不再像我。所以与其列一份做过的事，不如写下一直回来的念头。"
-              en="I have never managed to describe myself in a way that survives being read back a year later. So instead of a list of things I have done, here is what keeps coming back."
+              zh="我从考古研究和视觉设计走到 AI 产品。研究训练让我习惯追问依据，设计经验让我在意信息最后怎样被人理解。现在我把这两种习惯带进产品：先拆清问题，再让技术进入合适的位置。"
+              en="I came to AI products through archaeology and visual design. Research taught me to ask for evidence; design taught me to care about how information is finally understood. I bring both habits into product work: clarify the problem, then decide where technology belongs."
             />
           </FadeIn>
 
@@ -67,7 +67,7 @@ export function About() {
               size="aside"
               className="mt-14 text-ink-soft lg:mt-24 lg:text-right"
             >
-              let the quiet parts count
+              ask for evidence, leave room for wonder
             </HandwrittenHeading>
           </FadeIn>
         </div>

@@ -1,9 +1,12 @@
 import { About } from "./About";
+import { AINotes } from "./AINotes";
 import { Footer } from "./Footer";
 import { Hero } from "./Hero";
-import { Journey } from "./Journey";
+import { Lab } from "./Lab";
 import { Navbar } from "./Navbar";
+import { Projects } from "./Projects";
 import { SayHello } from "./SayHello";
+import { SplashIntro } from "./SplashIntro";
 import { HandDrawnDivider } from "./sketch/HandDrawnDivider";
 
 /** Sections are joined by a drawing rather than a rule or a change of colour. */
@@ -26,14 +29,19 @@ function Divider({ align }: { align: "left" | "center" | "right" }) {
 export function App() {
   return (
     <div className="relative min-h-svh w-full overflow-x-hidden">
+      <SplashIntro />
       <Navbar />
       <main>
         <Hero />
         <Divider align="left" />
+        <Projects />
+        <Divider align="right" />
+        <AINotes />
+        <Divider align="center" />
+        <Lab />
+        <Divider align="left" />
         <About />
         <Divider align="right" />
-        <Journey />
-        <Divider align="center" />
         <SayHello />
       </main>
       <Footer />

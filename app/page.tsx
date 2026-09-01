@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { App } from "./components/App";
 
 export const metadata: Metadata = {
-  title: "Yifan — a personal journal",
+  title: "冯一帆｜AI 产品、游戏与交互体验",
   description:
-    "My name is Yifan. I was born in 2000. A quiet corner of the internet for small thoughts, drawings, and the person I was before I knew any of this.",
+    "冯一帆的个人网站，记录 Moonshadow Tarot、溪谷新芽等 AI 项目，以及公众号“AI星球的随笔”中的产品观察与实践。",
 };
 
 export default function Home() {

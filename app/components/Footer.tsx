@@ -9,7 +9,7 @@ export function Footer() {
           © {new Date().getFullYear()} Yifan
         </p>
         <p className="font-hand text-lg text-ink-faint">
-          made slowly, by hand
+          made with curiosity, checked by hand
         </p>
       </div>
     </footer>

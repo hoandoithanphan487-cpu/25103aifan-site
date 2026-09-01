@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Yifan — a personal journal",
+  title: "冯一帆｜AI 产品、游戏与交互体验",
   description:
-    "我叫冯一帆，出生于 2000 年。My name is Yifan. A quiet corner of the internet for small thoughts, drawings, and the person I was before I knew any of this.",
+    "冯一帆的个人网站，记录 Moonshadow Tarot、溪谷新芽等 AI 项目，以及公众号“AI星球的随笔”中的产品观察与实践。",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

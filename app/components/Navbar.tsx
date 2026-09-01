@@ -7,9 +7,11 @@ import { SketchStar } from "./sketch/SketchStar";
 
 const LINKS = [
   { href: "#home", zh: "首页", en: "Home" },
-  { href: "#about", zh: "关于", en: "About" },
-  { href: "#journey", zh: "经历", en: "Journey" },
-  { href: "#contact", zh: "问候", en: "Say hello" },
+  { href: "#projects", zh: "项目", en: "Projects" },
+  { href: "#notes", zh: "AI 随笔", en: "AI Notes" },
+  { href: "#lab", zh: "实验室", en: "Lab" },
+  { href: "#about", zh: "关于我", en: "About" },
+  { href: "#contact", zh: "联系", en: "Contact" },
 ] as const;
 
 function NavLink({
@@ -30,7 +32,7 @@ function NavLink({
       href={href}
       onClick={onNavigate}
       className={[
-        "group relative inline-flex flex-col items-start gap-[0.15em]",
+        "group relative inline-flex min-w-0 flex-col items-start gap-[0.15em]",
         "transition-opacity duration-500 hover:opacity-80 focus-visible:outline-none",
         className,
       ]
@@ -92,7 +94,7 @@ export function Navbar() {
           <SketchStar className="h-2 w-2 shrink-0 translate-y-[-0.35em] transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:rotate-[18deg] motion-reduce:transition-none" />
         </a>
 
-        <div className="hidden items-end gap-10 md:flex lg:gap-14">
+        <div className="hidden items-end gap-5 md:flex lg:gap-8 xl:gap-10">
           {LINKS.map((link) => (
             <NavLink key={link.href} href={link.href} zh={link.zh} en={link.en} />
           ))}

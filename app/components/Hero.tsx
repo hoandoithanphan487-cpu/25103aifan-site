@@ -38,7 +38,9 @@ export function Hero() {
       <div className="grid items-center gap-14 sm:gap-16 md:grid-cols-12 md:gap-6">
         <div className="relative md:col-span-5 md:col-start-1 md:pt-8">
           <motion.div {...rise(0)}>
-            <SectionLabel>Hello, nice to meet you</SectionLabel>
+            <SectionLabel className="max-w-full min-w-0 flex-wrap">
+              AI product maker · independent builder
+            </SectionLabel>
           </motion.div>
 
           <motion.div {...rise(0.1)} className="relative">
@@ -47,24 +49,24 @@ export function Hero() {
                 line of its own and the phrase cascades the way it would in a
                 notebook. */}
             <HandwrittenHeading as="h1" size="hero" className="mt-7 -ml-1">
-              <span className="block">my name is</span>
-              <span className="block pl-[0.7em]">Yifan</span>
+              <span className="block">building with AI</span>
+              <span className="block pl-[0.7em]">with care</span>
             </HandwrittenHeading>
           </motion.div>
 
           <motion.div {...rise(0.22)}>
             <BilingualPair
               className="mt-7"
-              zh="2000 年出生。这里是一个安静的角落，留给细小的念头，也留给那个还不懂这些的我。"
-              en="Born in 2000. A quiet corner for small thoughts, and for the person I was before I knew any of this."
+              zh="我是冯一帆。我用 AI 做产品、游戏和交互体验，也记录人与模型一起工作的过程。"
+              en="I’m Yifan. I build AI products, games, and interactive experiences, and write about what happens when people and models work together."
             />
           </motion.div>
 
           <motion.div {...rise(0.34)} className="mt-12">
             <HandwrittenLink
-              href="#about"
-              zh="遇见今天的我"
-              en="meet the me of today"
+              href="#projects"
+              zh="看看我做的项目"
+              en="see what I’m building"
             />
           </motion.div>
         </div>

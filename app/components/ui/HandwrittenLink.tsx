@@ -10,6 +10,9 @@ type HandwrittenLinkProps = {
   className?: string;
   /** Set false for navigation, where an arrow would be noise. */
   arrow?: boolean;
+  /** Omitted by default so in-page anchors keep the current behaviour. */
+  target?: string;
+  rel?: string;
 };
 
 /**
@@ -23,10 +26,14 @@ export function HandwrittenLink({
   en,
   className,
   arrow = true,
+  target,
+  rel,
 }: HandwrittenLinkProps) {
   return (
     <a
       href={href}
+      target={target}
+      rel={rel}
       className={[
         "group inline-flex items-baseline gap-3",
         "transition-colors duration-500 focus-visible:outline-none",

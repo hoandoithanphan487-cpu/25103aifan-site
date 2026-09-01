@@ -1,0 +1,5 @@
+{
+  "buildCommand": "PAGES_BASE=/ npm run build:pages",
+  "outputDirectory": "dist-pages",
+  "framework": null
+}

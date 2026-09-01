@@ -42,30 +42,43 @@ test("server-renders the bilingual journal", async () => {
   const html = await response.text();
 
   assert.match(html, /<html[^>]*lang="zh-CN"/i);
-  assert.match(html, /<title>Yifan — a personal journal<\/title>/i);
+  assert.match(html, /<title>冯一帆｜AI 产品、游戏与交互体验<\/title>/i);
 
-  // Identity: the name and the birth year must both survive on the first screen.
-  assert.match(html, /my name is/);
-  assert.match(html, /Yifan/);
-  assert.match(html, /Born in 2000/);
-  assert.match(html, /2000 年出生/);
+  assert.match(html, /building with AI/);
+  assert.match(html, /with care/);
+  assert.match(html, /I’m Yifan/);
+  assert.match(html, /我是冯一帆/);
 
-  assert.match(html, /Hello, nice to meet you/i);
-  assert.match(html, /遇见今天的我/);
-  assert.match(html, /meet the me of today/);
+  assert.match(html, /AI product maker/i);
+  assert.match(html, /看看我做的项目/);
+  assert.match(html, /see what I’m building/);
 
   // Every navigation target resolves to a section that actually exists.
-  for (const id of ["home", "about", "journey", "contact"]) {
+  for (const id of ["home", "projects", "notes", "lab", "about", "contact"]) {
     assert.match(html, new RegExp(`href="#${id}"`));
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.match(html, /首页/);
-  assert.match(html, /关于/);
-  assert.match(html, /经历/);
-  assert.match(html, /问候/);
-  assert.match(html, /the me of today/);
-  assert.match(html, /how I got here/);
-  assert.match(html, /come say hello/);
+  assert.match(html, /项目/);
+  assert.match(html, /AI 随笔/);
+  assert.match(html, /实验室/);
+  assert.match(html, /关于我/);
+  assert.match(html, /联系/);
+  assert.match(html, /things I am building/);
+  assert.match(html, /AI 星球的随笔/);
+  assert.match(html, /unfinished on purpose/);
+  assert.match(html, /the me behind the work/);
+  assert.match(html, /let’s make something useful/);
+
+  assert.match(html, /Moonshadow Tarot/);
+  assert.match(html, /溪谷新芽/);
+  assert.match(
+    html,
+    /https:\/\/mp\.weixin\.qq\.com\/s\/TpvfeBbUiQUuIfV7k2sI_A/,
+  );
+  assert.match(html, /noreferrer noopener/);
+  assert.doesNotMatch(html, /已正式上线/);
+  assert.doesNotMatch(html, /5[–-]6\s*小时/);
 
   // No leftover corporate / robot content from the original template.
   assert.doesNotMatch(html, /Agentify|Solutions/i);
@@ -77,10 +90,10 @@ test("keeps Chinese and English together in the editorial copy", async () => {
   const response = await render();
   const html = await response.text();
 
-  assert.match(html, /我会留意光/);
-  assert.match(html, /I notice light, and weather/);
-  assert.match(html, /我宁愿开始得笨拙/);
-  assert.match(html, /I would rather begin badly/);
+  assert.match(html, /我关心模型能做什么/);
+  assert.match(html, /I care about what a model can do/);
+  assert.match(html, /我喜欢把模糊想法拆成/);
+  assert.match(html, /I like turning vague ideas/);
 });
 
 test("references every portrait through a project asset path", async () => {

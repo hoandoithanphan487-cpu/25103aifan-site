@@ -4,7 +4,7 @@ import { FadeIn } from "./ui/FadeIn";
 import { HandwrittenLink } from "./ui/HandwrittenLink";
 import { JournalSection } from "./ui/JournalSection";
 import {
-  EditorialText,
+  BilingualPair,
   HandwrittenHeading,
   SectionLabel,
 } from "./ui/typography";
@@ -25,18 +25,18 @@ export function SayHello() {
       <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-6 lg:col-start-2">
           <FadeIn>
-            <SectionLabel>Say hello</SectionLabel>
+            <SectionLabel>Contact</SectionLabel>
             <HandwrittenHeading className="mt-6 -ml-1">
-              come say hello
+              let’s make something useful
             </HandwrittenHeading>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <EditorialText className="mt-9 max-w-[44ch]">
-              If any of this felt familiar, I would like to hear from you. There
-              is not very much here yet, which is rather the point — it is a
-              notebook, not a monument.
-            </EditorialText>
+            <BilingualPair
+              className="mt-9"
+              zh="如果你正在做 AI 产品、互动体验、游戏或内容项目，欢迎来聊。合作、工作机会，或者只是交换一个还没想清楚的念头，都可以。"
+              en="If you are working on an AI product, an interactive experience, a game, or a piece of writing, I would be glad to hear about it. Collaboration, work, or an unfinished thought are all good reasons to say hello."
+            />
           </FadeIn>
 
           {CONTACT_LINKS.length > 0 ? (
