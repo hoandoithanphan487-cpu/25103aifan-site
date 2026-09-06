@@ -2,9 +2,34 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.25103aifan.com"),
   title: "冯一帆｜AI 产品、游戏与交互体验",
   description:
-    "冯一帆的个人网站，记录 Moonshadow Tarot、RELIC 3D、溪谷新芽等 AI 产品、游戏与数字交互项目，以及公众号“AI星球的随笔”中的产品观察与实践。",
+    "冯一帆的个人网站，记录 REJOIN 陶片智能拼合、RELIC 3D、Moonshadow Tarot、溪谷新芽等 AI 产品与数字交互项目，以及公众号“AI星球的随笔”中的产品观察与实践。",
+  openGraph: {
+    type: "website",
+    locale: "zh_CN",
+    url: "/",
+    siteName: "Yifan — Selected Works",
+    title: "冯一帆｜AI 产品、游戏与交互体验",
+    description:
+      "REJOIN 陶片智能拼合、RELIC 3D、Moonshadow Tarot 与溪谷新芽：AI 产品、数字文化遗产和交互体验作品集。",
+    images: [
+      {
+        url: "/og.png",
+        width: 1734,
+        height: 907,
+        alt: "Yifan Selected Works：陶片拼合、数字文化遗产、塔罗与农场游戏作品集",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "冯一帆｜AI 产品、游戏与交互体验",
+    description:
+      "REJOIN 陶片智能拼合、RELIC 3D、Moonshadow Tarot 与溪谷新芽。",
+    images: ["/og.png"],
+  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

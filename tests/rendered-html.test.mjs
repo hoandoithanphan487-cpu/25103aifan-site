@@ -20,6 +20,13 @@ const RELIC_FILES = [
   "images/projects/gallery/relic-3d-restoration.jpg",
 ];
 
+const REJOIN_FILES = [
+  "images/projects/rejoin-poster-v1.png",
+  "images/projects/gallery/rejoin-intake-v1.png",
+  "images/projects/gallery/rejoin-compare-v1.png",
+  "images/projects/gallery/rejoin-review-v1.png",
+];
+
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
@@ -77,14 +84,35 @@ test("server-renders the bilingual journal", async () => {
   assert.match(html, /the me behind the work/);
   assert.match(html, /let’s make something useful/);
 
-  assert.match(html, /Moonshadow Tarot/);
+  assert.match(html, /REJOIN/);
+  assert.match(html, /id="rejoin"/);
+  assert.match(
+    html,
+    /https:\/\/rejoin-ceramic-matching\.hoandoithanphan487\.chatgpt\.site\//,
+  );
   assert.match(html, /RELIC 3D/);
   assert.match(html, /id="relic-3d"/);
   assert.match(
     html,
     /https:\/\/relic-3d-tomb\.hoandoithanphan487\.chatgpt\.site\//,
   );
+  assert.match(html, /Moonshadow Tarot/);
   assert.match(html, /溪谷新芽/);
+  const projectPositions = [
+    html.indexOf('id="rejoin"'),
+    html.indexOf('id="relic-3d"'),
+    html.indexOf('id="moonshadow-tarot"'),
+    html.indexOf('id="valley-sprout"'),
+  ];
+  assert.ok(
+    projectPositions.every((position) => position >= 0),
+    "every selected project should have a stable anchor",
+  );
+  assert.deepEqual(
+    [...projectPositions].sort((a, b) => a - b),
+    projectPositions,
+    "selected projects should render as REJOIN, RELIC 3D, Moonshadow, Valley Sprout",
+  );
   assert.match(
     html,
     /https:\/\/mp\.weixin\.qq\.com\/s\/TpvfeBbUiQUuIfV7k2sI_A/,
@@ -102,6 +130,12 @@ test("server-renders the bilingual journal", async () => {
 
 test("ships every RELIC 3D project image", async () => {
   for (const file of RELIC_FILES) {
+    await access(new URL(file, publicRoot));
+  }
+});
+
+test("ships every REJOIN project image", async () => {
+  for (const file of REJOIN_FILES) {
     await access(new URL(file, publicRoot));
   }
 });
