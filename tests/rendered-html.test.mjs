@@ -13,6 +13,13 @@ const EXPRESSION_FILES = [
   "extra-expression-1.png",
 ];
 
+const RELIC_FILES = [
+  "images/projects/relic-3d-poster.jpg",
+  "images/projects/gallery/relic-3d-evidence.jpg",
+  "images/projects/gallery/relic-3d-structure.jpg",
+  "images/projects/gallery/relic-3d-restoration.jpg",
+];
+
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
@@ -71,6 +78,12 @@ test("server-renders the bilingual journal", async () => {
   assert.match(html, /let’s make something useful/);
 
   assert.match(html, /Moonshadow Tarot/);
+  assert.match(html, /RELIC 3D/);
+  assert.match(html, /id="relic-3d"/);
+  assert.match(
+    html,
+    /https:\/\/relic-3d-tomb\.hoandoithanphan487\.chatgpt\.site\//,
+  );
   assert.match(html, /溪谷新芽/);
   assert.match(
     html,
@@ -79,11 +92,18 @@ test("server-renders the bilingual journal", async () => {
   assert.match(html, /noreferrer noopener/);
   assert.doesNotMatch(html, /已正式上线/);
   assert.doesNotMatch(html, /5[–-]6\s*小时/);
+  assert.doesNotMatch(html, /\bdemo\b/i);
 
   // No leftover corporate / robot content from the original template.
   assert.doesNotMatch(html, /Agentify|Solutions/i);
   assert.doesNotMatch(html, /<video\b/i);
   assert.doesNotMatch(html, /robot/i);
+});
+
+test("ships every RELIC 3D project image", async () => {
+  for (const file of RELIC_FILES) {
+    await access(new URL(file, publicRoot));
+  }
 });
 
 test("keeps Chinese and English together in the editorial copy", async () => {

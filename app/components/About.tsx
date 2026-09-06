@@ -42,6 +42,18 @@ export function About() {
               zh="我从考古研究和视觉设计走到 AI 产品。研究训练让我习惯追问依据，设计经验让我在意信息最后怎样被人理解。现在我把这两种习惯带进产品：先拆清问题，再让技术进入合适的位置。"
               en="I came to AI products through archaeology and visual design. Research taught me to ask for evidence; design taught me to care about how information is finally understood. I bring both habits into product work: clarify the problem, then decide where technology belongs."
             />
+            <a
+              href="#relic-3d"
+              className="mt-6 inline-flex items-baseline gap-2 border-b border-ink/25 pb-1 font-editorial-cn text-[0.82rem] font-light tracking-[0.08em] text-ink-soft transition-colors duration-300 hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper"
+            >
+              <span>
+                从考古走向交互：RELIC 3D
+                <span className="mt-1 block font-editorial text-[0.66rem] uppercase tracking-[0.14em] text-ink-soft">
+                  From archaeology to interaction
+                </span>
+              </span>
+              <span aria-hidden="true">↑</span>
+            </a>
           </FadeIn>
 
           <ul className="mt-12 space-y-10">

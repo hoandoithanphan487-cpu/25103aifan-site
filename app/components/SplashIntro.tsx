@@ -126,25 +126,29 @@ export function SplashIntro() {
   }, []);
 
   useEffect(() => {
-    const record = isRecordMode();
-    setHideSkip(record);
-    setUseLive(record);
+    const frame = window.requestAnimationFrame(() => {
+      const record = isRecordMode();
+      setHideSkip(record);
+      setUseLive(record);
 
-    if (prefersReducedMotion && !record) {
-      setPhase("done");
-      return;
-    }
-
-    try {
-      if (!shouldForceIntro() && sessionStorage.getItem(STORAGE_KEY) === "1") {
+      if (prefersReducedMotion && !record) {
         setPhase("done");
         return;
       }
-    } catch {
-      // Play anyway if storage is blocked.
-    }
 
-    setPhase("play");
+      try {
+        if (!shouldForceIntro() && sessionStorage.getItem(STORAGE_KEY) === "1") {
+          setPhase("done");
+          return;
+        }
+      } catch {
+        // Play anyway if storage is blocked.
+      }
+
+      setPhase("play");
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [prefersReducedMotion]);
 
   useEffect(() => {

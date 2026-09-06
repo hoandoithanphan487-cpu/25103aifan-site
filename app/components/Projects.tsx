@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- This component is also rendered by the static Vite/GitHub Pages entry, where next/image is unavailable. */
+import { Fragment } from "react";
 import { assetPath } from "../asset";
 import { HandDrawnArrow } from "./sketch/HandDrawnArrow";
 import { SketchSparkle } from "./sketch/SketchSparkle";
@@ -18,13 +19,18 @@ type Project = {
   id: string;
   name: string;
   subtitle: string;
-  nameScript: "latin" | "cjk";
+  nameScript: "latin" | "cjk" | "caps";
   annotation: string;
   role: { zh: string; en: string };
   status: { zh: string; en: string };
   intro: { zh: string; en: string };
   notesLabel: string;
   notes: readonly string[];
+  live?: {
+    href: string;
+    zh: string;
+    en: string;
+  };
   poster: {
     src: string;
     alt: string;
@@ -39,6 +45,7 @@ type Project = {
     principles: readonly string[];
     shots: readonly Shot[];
     notesHeading: string;
+    aspect?: "standard" | "three-two";
   };
 };
 
@@ -106,6 +113,80 @@ const PROJECTS: readonly Project[] = [
     },
   },
   {
+    id: "relic-3d",
+    name: "RELIC 3D",
+    subtitle: "地下墓室数字重建与证据可视化",
+    nameScript: "caps",
+    annotation: "evidence becomes spatial",
+    role: {
+      zh: "项目策划 / 信息架构 / 交互设计",
+      en: "Product concept / Information architecture / Interaction design",
+    },
+    status: {
+      zh: "公开交互原型，可在线体验",
+      en: "Public interactive prototype, available online",
+    },
+    intro: {
+      zh: "这是一个面向数字文化遗产的交互项目。我把墓室结构、壁画图像与推定过程组织成可切换的空间信息层，让遗存状态、结构推定和复原方案分别呈现，也能互相对照。",
+      en: "RELIC 3D is an interactive digital-heritage project that organizes tomb architecture, mural imagery, and interpretive reasoning into switchable spatial layers. Existing-condition views, structural inference, and restoration proposals remain distinct while easy to compare.",
+    },
+    notesLabel: "核心设计",
+    notes: [
+      "把遗存、结构推定与复原方案组织为分层叙事",
+      "将墓道、墓室、壁画与图像材料组织在统一空间框架中",
+      "设计剖切视图、热点标注与三维漫游路径",
+      "以分层状态和说明文字标示记录与推定边界",
+    ],
+    live: {
+      href: "https://relic-3d-tomb.hoandoithanphan487.chatgpt.site/",
+      zh: "体验三维重建",
+      en: "Explore the interactive reconstruction",
+    },
+    poster: {
+      src: assetPath("images/projects/relic-3d-poster.jpg"),
+      alt: "RELIC 3D 项目海报：地下土层剖面中，一条斜坡墓道通向彩绘墓室",
+      width: 1024,
+      height: 1536,
+    },
+    showcase: {
+      label: "Restoration plates",
+      note: "以遗存、结构与复原三个视角整理地下墓室",
+      title: "把记录、推定与复原分开讲清楚",
+      notesHeading: "Visual method",
+      description:
+        "下方三张图版分别呈现壁画遗存、墓室结构推定和复原方案，用统一的纸张、线稿与赭石色调建立连续阅读。交互网站则进一步把三类信息放回地下空间，让观众理解墓道、墓室与壁画之间的关系。",
+      principles: [
+        "遗存图版保留残损、色卡与材质线索",
+        "结构图以剖切和线框说明地下空间关系",
+        "复原图保持与现状材料一致的色彩语气",
+      ],
+      aspect: "three-two",
+      shots: [
+        {
+          src: assetPath("images/projects/gallery/relic-3d-evidence.jpg"),
+          alt: "壁画遗存图版：残损壁画、线描覆片、色卡与表面样本被整理在同一张档案图版中",
+          label: "01 · Evidence / 遗存记录",
+          width: 1536,
+          height: 1024,
+        },
+        {
+          src: assetPath("images/projects/gallery/relic-3d-structure.jpg"),
+          alt: "地下墓室结构推定视图：墓道与多间墓室以半透明剖切方式呈现",
+          label: "02 · Structure / 结构推定",
+          width: 1536,
+          height: 1024,
+        },
+        {
+          src: assetPath("images/projects/gallery/relic-3d-restoration.jpg"),
+          alt: "地下墓室复原图版：彩绘壁画、墓室空间与侧向通道在纸张图版中呈现",
+          label: "03 · Restoration / 复原方案",
+          width: 1536,
+          height: 1024,
+        },
+      ],
+    },
+  },
+  {
     id: "valley-sprout",
     name: "溪谷新芽",
     subtitle: "AI-assisted 2D cozy farm game",
@@ -126,7 +207,7 @@ const PROJECTS: readonly Project[] = [
     notesLabel: "已验证产出",
     notes: [
       "约 10–15 分钟核心试玩",
-      "约 45–60 分钟内部 Demo 路径",
+      "约 45–60 分钟内部体验路径",
       "农场经营、任务、探索、NPC 与存档等基础模块",
       "正在重做资源循环、经济系统和多路线经营策略",
     ],
@@ -189,6 +270,19 @@ function ProjectName({ project }: { project: Project }) {
     );
   }
 
+  if (project.nameScript === "caps") {
+    return (
+      <>
+        <h3 className="font-editorial text-[1.55rem] font-normal uppercase leading-snug tracking-[0.14em] text-ink sm:text-[1.7rem]">
+          {project.name}
+        </h3>
+        <p className="mt-2 font-editorial-cn text-[1rem] font-light leading-snug text-ink-soft">
+          {project.subtitle}
+        </p>
+      </>
+    );
+  }
+
   return (
     <>
       <h3 className="font-editorial-cn text-[1.7rem] font-light leading-snug break-words text-ink">
@@ -202,20 +296,22 @@ function ProjectName({ project }: { project: Project }) {
 }
 
 function ProjectPoster({ project, index }: { project: Project; index: number }) {
-  const isMoonshadow = index === 0;
+  const isLeft = index % 2 === 0;
+  const isMoonshadow = project.id === "moonshadow-tarot";
+  const isValley = project.id === "valley-sprout";
 
   return (
     <figure
       className={[
         "group relative isolate mx-auto w-[min(88%,390px)] lg:w-full lg:max-w-none",
-        isMoonshadow ? "lg:ml-5" : "lg:mr-5",
+        isLeft ? "lg:ml-5" : "lg:mr-5",
       ].join(" ")}
     >
       <span
         aria-hidden="true"
         className={[
           "pointer-events-none absolute -z-20 -top-14 font-hand text-[6.8rem] leading-none sm:text-[8.5rem] lg:-top-20 lg:text-[10.5rem]",
-          isMoonshadow
+          isLeft
             ? "-left-5 -rotate-6 text-sea/20 lg:-left-16"
             : "-right-4 rotate-6 text-sand/30 lg:-right-12",
         ].join(" ")}
@@ -227,7 +323,7 @@ function ProjectPoster({ project, index }: { project: Project; index: number }) 
         aria-hidden="true"
         className={[
           "pointer-events-none absolute -z-10 overflow-hidden border border-ink/10 opacity-[0.14] saturate-50",
-          isMoonshadow
+          isLeft
             ? "inset-y-[7%] -right-[9%] left-[12%] rotate-3"
             : "inset-y-[7%] right-[12%] -left-[9%] -rotate-3",
         ].join(" ")}
@@ -247,14 +343,14 @@ function ProjectPoster({ project, index }: { project: Project; index: number }) 
         className={[
           "relative border border-ink/10 transition-transform duration-700 ease-out motion-reduce:transition-none",
           "group-hover:-translate-y-1.5 group-hover:rotate-0",
-          isMoonshadow ? "-rotate-[1.6deg]" : "rotate-[1.6deg]",
+          isLeft ? "-rotate-[1.6deg]" : "rotate-[1.6deg]",
         ].join(" ")}
       >
         <span
           aria-hidden="true"
           className={[
             "pointer-events-none absolute left-1/2 top-0 z-10 h-7 w-24 -translate-x-1/2 -translate-y-1/2 border-y border-ink/5 bg-paper-deep/90",
-            isMoonshadow ? "rotate-3" : "-rotate-3",
+            isLeft ? "rotate-3" : "-rotate-3",
           ].join(" ")}
         />
         <img
@@ -274,22 +370,28 @@ function ProjectPoster({ project, index }: { project: Project; index: number }) 
           <SketchMoon className="pointer-events-none absolute -right-12 bottom-[23%] hidden h-8 w-8 rotate-12 text-sea/80 sm:block" />
           <HandDrawnArrow className="pointer-events-none absolute -right-16 bottom-[17%] hidden h-8 w-20 -rotate-[68deg] text-sea/70 sm:block" />
         </>
-      ) : (
-        <SketchSunrise className="pointer-events-none absolute -left-20 bottom-[8%] hidden h-16 w-28 -rotate-6 text-sand sm:block" />
-      )}
+      ) : isValley ? (
+        <SketchSunrise
+          className={[
+            "pointer-events-none absolute bottom-[8%] hidden h-16 w-28 text-sand sm:block",
+            isLeft ? "-right-20 rotate-6" : "-left-20 -rotate-6",
+          ].join(" ")}
+        />
+      ) : null}
     </figure>
   );
 }
 
 function ProjectShowcase({ project, index }: { project: Project; index: number }) {
-  const isMoonshadow = index === 0;
+  const isLeft = index % 2 === 0;
+  const isMoonshadow = project.id === "moonshadow-tarot";
 
   return (
     <section className="mt-24 grid min-w-0 items-end gap-12 lg:mt-32 lg:grid-cols-12 lg:gap-10">
       <div
         className={[
           "min-w-0",
-          isMoonshadow
+          isLeft
             ? "lg:col-span-7 lg:col-start-1"
             : "lg:order-2 lg:col-span-7 lg:col-start-6",
         ].join(" ")}
@@ -318,7 +420,11 @@ function ProjectShowcase({ project, index }: { project: Project; index: number }
 
         <FadeIn delay={0.12}>
           <div className="mt-7">
-            <StackedShots shots={project.showcase.shots} mirror={!isMoonshadow} />
+            <StackedShots
+              shots={project.showcase.shots}
+              mirror={!isLeft}
+              aspect={project.showcase.aspect}
+            />
           </div>
         </FadeIn>
       </div>
@@ -327,7 +433,7 @@ function ProjectShowcase({ project, index }: { project: Project; index: number }
         delay={0.15}
         className={[
           "min-w-0",
-          isMoonshadow
+          isLeft
             ? "lg:col-span-4 lg:col-start-9"
             : "lg:order-1 lg:col-span-4 lg:col-start-1",
         ].join(" ")}
@@ -359,7 +465,7 @@ function ProjectShowcase({ project, index }: { project: Project; index: number }
 }
 
 function ProjectDetails({ project, index }: { project: Project; index: number }) {
-  const isMoonshadow = index === 0;
+  const isLeft = index % 2 === 0;
 
   return (
     <div className="relative min-w-0">
@@ -367,7 +473,7 @@ function ProjectDetails({ project, index }: { project: Project; index: number })
         <p
           className={[
             "mb-9 w-max max-w-full font-hand text-[0.96rem] text-sea sm:mb-11",
-            isMoonshadow ? "ml-auto rotate-2" : "-rotate-2 text-ink-faint",
+            isLeft ? "ml-auto rotate-2" : "-rotate-2 text-ink-faint",
           ].join(" ")}
         >
           {project.annotation}
@@ -425,6 +531,31 @@ function ProjectDetails({ project, index }: { project: Project; index: number })
           ))}
         </ul>
       </FadeIn>
+
+      {project.live ? (
+        <FadeIn delay={0.2}>
+          <a
+            href={project.live.href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${project.live.zh} / ${project.live.en}（在新标签页打开）`}
+            className="group mt-10 inline-flex max-w-full flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-ink/35 pb-1.5 text-ink transition-colors duration-300 hover:border-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper"
+          >
+            <span className="font-editorial-cn text-[0.95rem] font-light tracking-[0.08em]">
+              {project.live.zh}
+            </span>
+            <span className="font-editorial text-[0.68rem] uppercase tracking-[0.18em] text-ink-soft">
+              {project.live.en}
+            </span>
+            <span
+              aria-hidden="true"
+              className="text-[0.9rem] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none"
+            >
+              ↗
+            </span>
+          </a>
+        </FadeIn>
+      ) : null}
     </div>
   );
 }
@@ -444,46 +575,48 @@ export function Projects() {
           <FadeIn delay={0.08}>
             <BilingualPair
               className="mt-9"
-              zh="我更愿意用做出来的东西说明自己会什么。这两个项目还在生长，但已经可以运行，也留下了完整的思考和迭代过程。"
-              en="I would rather explain what I can do through the things I make. These two projects are still growing, but both already run and have a real trail of decisions behind them."
+              zh="我更愿意用做出来的东西说明自己会什么。这些项目处在不同阶段，但都已经可以运行，也留下了完整的思考和迭代过程。"
+              en="I would rather explain what I can do through the things I make. These projects are at different stages, but each one already works and carries a real trail of decisions behind it."
             />
           </FadeIn>
         </div>
 
         <div className="mt-28 min-w-0 space-y-32 lg:col-span-12 lg:mt-36 lg:space-y-44">
           {PROJECTS.map((project, index) => (
-            <article key={project.id} className="min-w-0">
+            <Fragment key={project.id}>
               {index > 0 ? (
                 <HandDrawnDivider className="mb-28 ml-auto mr-auto h-4 w-[min(280px,72%)] -rotate-1 text-rule lg:mb-36" />
               ) : null}
 
-              <div className="grid min-w-0 items-start gap-16 lg:grid-cols-12 lg:gap-10">
-                <div
-                  className={[
-                    "order-1 min-w-0",
-                    index === 0
-                      ? "lg:order-1 lg:col-span-5 lg:col-start-1 lg:-mt-8"
-                      : "lg:order-2 lg:col-span-5 lg:col-start-8 lg:-mt-10",
-                  ].join(" ")}
-                >
-                  <FadeIn delay={0.04}>
-                    <ProjectPoster project={project} index={index} />
-                  </FadeIn>
-                </div>
+              <article id={project.id} tabIndex={-1} className="min-w-0">
+                <div className="grid min-w-0 items-start gap-16 lg:grid-cols-12 lg:gap-10">
+                  <div
+                    className={[
+                      "order-1 min-w-0",
+                      index % 2 === 0
+                        ? "lg:order-1 lg:col-span-5 lg:col-start-1 lg:-mt-8"
+                        : "lg:order-2 lg:col-span-5 lg:col-start-8 lg:-mt-10",
+                    ].join(" ")}
+                  >
+                    <FadeIn delay={0.04}>
+                      <ProjectPoster project={project} index={index} />
+                    </FadeIn>
+                  </div>
 
-                <div
-                  className={[
-                    "order-2 min-w-0",
-                    index === 0
-                      ? "lg:order-2 lg:col-span-6 lg:col-start-7 lg:pt-24"
-                      : "lg:order-1 lg:col-span-6 lg:col-start-1 lg:pt-12",
-                  ].join(" ")}
-                >
-                  <ProjectDetails project={project} index={index} />
+                  <div
+                    className={[
+                      "order-2 min-w-0",
+                      index % 2 === 0
+                        ? "lg:order-2 lg:col-span-6 lg:col-start-7 lg:pt-24"
+                        : "lg:order-1 lg:col-span-6 lg:col-start-1 lg:pt-12",
+                    ].join(" ")}
+                  >
+                    <ProjectDetails project={project} index={index} />
+                  </div>
                 </div>
-              </div>
-              <ProjectShowcase project={project} index={index} />
-            </article>
+                <ProjectShowcase project={project} index={index} />
+              </article>
+            </Fragment>
           ))}
         </div>
       </div>
