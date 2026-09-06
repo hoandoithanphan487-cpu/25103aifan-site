@@ -210,8 +210,8 @@ const PROJECTS: readonly Project[] = [
       en: "Independent developer / AI product builder",
     },
     status: {
-      zh: "本地可运行 MVP，正式上线准备中",
-      en: "Local working MVP, preparing for a future public release",
+      zh: "已上线，产品仍在持续迭代",
+      en: "Live, with continued product iteration",
     },
     intro: {
       zh: "这是一个让用户完成提问、选择牌阵、抽牌和查看 AI 解读的交互产品。我把用户问题、牌阵、牌面、正逆位和牌位整理成结构化输入，再用明确的角色边界、生成顺序和输出格式约束模型。",
@@ -225,6 +225,11 @@ const PROJECTS: readonly Project[] = [
       "超时、异常格式、敏感问题和本地降级处理",
       "单牌与三牌流程，覆盖完整 78 张塔罗牌",
     ],
+    live: {
+      href: "https://moonshadow-tarot.vercel.app",
+      zh: "体验月影塔罗",
+      en: "Visit Moonshadow Tarot",
+    },
     poster: {
       src: assetPath("images/projects/moonshadow-tarot-poster.jpg"),
       alt: "Moonshadow Tarot 项目海报：黑色星空笔触、三张塔罗牌与猫的复古纸张插画",
