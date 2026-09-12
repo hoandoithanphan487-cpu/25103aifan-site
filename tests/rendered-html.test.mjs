@@ -88,14 +88,11 @@ test("server-renders the bilingual journal", async () => {
   assert.match(html, /id="rejoin"/);
   assert.match(
     html,
-    /https:\/\/rejoin-ceramic-matching\.hoandoithanphan487\.chatgpt\.site\//,
+    /https:\/\/www\.25103aifan\.com\/rejoin\//,
   );
   assert.match(html, /RELIC 3D/);
   assert.match(html, /id="relic-3d"/);
-  assert.match(
-    html,
-    /https:\/\/relic-3d-tomb\.hoandoithanphan487\.chatgpt\.site\//,
-  );
+  assert.match(html, /href="\/relic-3d\/"/);
   assert.match(html, /Moonshadow Tarot/);
   assert.match(html, /溪谷新芽/);
   const projectPositions = [
@@ -134,10 +131,45 @@ test("ships every RELIC 3D project image", async () => {
   }
 });
 
+test("ships the public RELIC 3D site without ChatGPT-hosted links", async () => {
+  for (const file of [
+    "relic-3d/index.html",
+    "relic-3d/favicon.svg",
+    "relic-3d/images/tomb-hero.png",
+    "relic-3d/images/tomb-mural-texture.jpg",
+    "relic-3d/images/tomb-mural.png",
+    "relic-3d/images/tomb-structure.png",
+  ]) {
+    await access(new URL(file, publicRoot));
+  }
+
+  const html = await readFile(new URL("relic-3d/index.html", publicRoot), "utf8");
+  assert.match(html, /<title>RELIC 3D｜地下墓室三维复原系统<\/title>/);
+  assert.match(html, /(?:href|src)="\/relic-3d\/assets\//);
+  assert.doesNotMatch(html, /chatgpt\.site/);
+});
+
 test("ships every REJOIN project image", async () => {
   for (const file of REJOIN_FILES) {
     await access(new URL(file, publicRoot));
   }
+});
+
+test("ships the public REJOIN prototype without ChatGPT-hosted links", async () => {
+  for (const file of [
+    "rejoin/index.html",
+    "rejoin/index.rsc",
+    "rejoin/favicon-rejoin.svg",
+    "rejoin/images/ceramic-scene.jpg",
+  ]) {
+    await access(new URL(file, publicRoot));
+  }
+
+  const html = await readFile(new URL("rejoin/index.html", publicRoot), "utf8");
+  assert.match(html, /<title>REJOIN｜陶片智能拼合系统<\/title>/);
+  assert.match(html, /(?:href|src)="\/rejoin\/_next\//);
+  assert.match(html, /src="\/rejoin\/images\/ceramic-scene\.jpg"/);
+  assert.doesNotMatch(html, /chatgpt\.site/);
 });
 
 test("keeps Chinese and English together in the editorial copy", async () => {

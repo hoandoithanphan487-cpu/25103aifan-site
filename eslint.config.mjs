@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "dist-pages/**",
     "out/**",
     "build/**",
+    "public/rejoin/**",
+    "public/relic-3d/**",
     "next-env.d.ts",
   ]),
   eslint.configs.recommended,

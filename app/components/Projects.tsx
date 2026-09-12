@@ -77,7 +77,7 @@ const PROJECTS: readonly Project[] = [
       "以研究原型验证完整的人机协同工作流",
     ],
     live: {
-      href: "https://rejoin-ceramic-matching.hoandoithanphan487.chatgpt.site/",
+      href: "https://www.25103aifan.com/rejoin/",
       zh: "体验智能拼合",
       en: "Explore the matching prototype",
     },
@@ -151,7 +151,7 @@ const PROJECTS: readonly Project[] = [
       "以分层状态和说明文字标示记录与推定边界",
     ],
     live: {
-      href: "https://relic-3d-tomb.hoandoithanphan487.chatgpt.site/",
+      href: assetPath("relic-3d/"),
       zh: "体验三维重建",
       en: "Explore the interactive reconstruction",
     },
