@@ -640,6 +640,104 @@ function ProjectDetails({ project, index }: { project: Project; index: number })
   );
 }
 
+/**
+ * 《白玫瑰来信》入口。
+ *
+ * 最终海报尚未选定，所以这里只做一个与站点排版一致的文字入口：
+ * 手写边注 + 编辑体标题 + 说明 + 进入游戏的按钮。
+ * 游戏本身是 /white-roses/ 下的独立静态页面，打开即玩，不需要登录。
+ */
+function RoseLetterEntry() {
+  return (
+    <section className="min-w-0 pt-24 lg:pt-32">
+      <HandDrawnDivider className="mb-16 ml-auto mr-auto h-4 w-[min(280px,72%)] rotate-1 text-rule lg:mb-24" />
+
+      <FadeIn delay={0.04}>
+        <div className="relative mx-auto min-w-0 max-w-[64rem] border border-rule bg-paper-deep/50 px-7 py-12 sm:px-12 sm:py-14 lg:px-16 lg:py-16">
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-9 left-2 font-hand text-[3.4rem] leading-none text-sea/25 sm:text-[4.4rem]"
+          >
+            ✾
+          </span>
+
+          <div className="grid min-w-0 gap-10 lg:grid-cols-12 lg:gap-12">
+            <div className="min-w-0 lg:col-span-7">
+              <SectionLabel>New interactive work</SectionLabel>
+
+              <p className="mt-7 w-max max-w-full -rotate-1 font-hand text-[0.96rem] text-sea">
+                a letter finally read
+                <span className="mx-auto mt-0.5 block h-3 w-[72%] rounded-[50%] border-b border-current opacity-60" />
+              </p>
+
+              <h3 className="mt-5 font-editorial-cn text-[1.75rem] font-light leading-snug text-ink sm:text-[2.1rem]">
+                白玫瑰来信
+              </h3>
+              <p className="mt-1.5 font-editorial text-[0.92rem] font-light leading-snug text-ink-faint">
+                Letter of an Unknown Woman
+              </p>
+
+              <p className="mt-7 max-w-[38rem] font-editorial-cn text-[1.0625rem] font-light leading-[1.95] text-ink-soft sm:text-[1.125rem]">
+                以女主人公视角展开的六章互动叙事，探索旧物、作出选择，读完一封迟来的信。
+              </p>
+              <p className="mt-1.5 max-w-[38rem] font-editorial text-[0.92rem] font-light leading-[1.75] text-ink-faint sm:text-[0.98rem]">
+                A six-chapter interactive narrative told in her own voice: explore
+                the objects she kept, make her choices, and finish a letter that
+                arrived too late.
+              </p>
+            </div>
+
+            <div className="min-w-0 lg:col-span-5 lg:col-start-9 lg:pt-16">
+              <dl className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-5 gap-y-3 border-y border-rule py-5">
+                <dt className="font-editorial text-[0.62rem] uppercase tracking-[0.22em] text-ink-faint">
+                  Format
+                </dt>
+                <dd className="min-w-0 font-editorial-cn text-[0.93rem] font-light leading-relaxed text-ink-soft">
+                  六章 · 十八件旧物 · 三种结局
+                  <span className="mt-1 block font-editorial text-[0.78rem] text-ink-faint">
+                    Six chapters, eighteen objects, three endings
+                  </span>
+                </dd>
+                <dt className="font-editorial text-[0.62rem] uppercase tracking-[0.22em] text-ink-faint">
+                  Play
+                </dt>
+                <dd className="min-w-0 font-editorial-cn text-[0.93rem] font-light leading-relaxed text-ink-soft">
+                  浏览器中直接打开，无需登录
+                  <span className="mt-1 block font-editorial text-[0.78rem] text-ink-faint">
+                    Opens in the browser; progress is saved locally
+                  </span>
+                </dd>
+              </dl>
+
+              <a
+                href={assetPath("white-roses/")}
+                className="group mt-9 inline-flex min-h-[3rem] max-w-full flex-wrap items-center gap-x-4 gap-y-1 border border-ink/35 px-7 py-3.5 text-ink transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper"
+              >
+                <span className="font-editorial-cn text-[1rem] font-light tracking-[0.14em]">
+                  进入游戏
+                </span>
+                <span className="font-editorial text-[0.68rem] uppercase tracking-[0.18em] text-ink-soft transition-colors duration-300 group-hover:text-paper/75">
+                  Enter the story
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="text-[0.9rem] transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none"
+                >
+                  →
+                </span>
+              </a>
+
+              <p className="mt-4 font-editorial text-[0.72rem] leading-relaxed text-ink-faint">
+                https://www.25103aifan.com/white-roses/
+              </p>
+            </div>
+          </div>
+        </div>
+      </FadeIn>
+    </section>
+  );
+}
+
 export function Projects() {
   return (
     <JournalSection id="projects">
@@ -698,6 +796,8 @@ export function Projects() {
               </article>
             </Fragment>
           ))}
+
+          <RoseLetterEntry />
         </div>
       </div>
     </JournalSection>

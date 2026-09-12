@@ -1,0 +1,16 @@
+:root {
+  --night: #14162c;
+  --panel: #202541;
+  --panel-deep: #191d35;
+  --iris: #626ea7;
+  --sage: #a8c4c2;
+  --ivory: #eee8d9;
+  --quiet: #b9bbd0;
+  --gold: #d6c39d;
+  --line: #a9b5c147;
+  --serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+  --display: "STKaiti", "Kaiti SC", "Songti SC", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft Yahei", sans-serif;
+  font-synthesis: none;
+  color-scheme: dark;
+}
