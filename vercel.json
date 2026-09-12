@@ -1,5 +1,32 @@
 {
   "buildCommand": "PAGES_BASE=/ npm run build:pages",
   "outputDirectory": "dist-pages",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/white-roses",
+      "destination": "/white-roses/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/white-roses",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/white-roses/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
 }
