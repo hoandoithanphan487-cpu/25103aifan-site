@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- This component is also rendered by the static Vite/GitHub Pages entry, where next/image is unavailable. */
 import { Fragment } from "react";
+import { PROJECT_CATEGORIES } from "./project-categories";
 import { assetPath } from "../asset";
 import { HandDrawnArrow } from "./sketch/HandDrawnArrow";
 import { SketchSparkle } from "./sketch/SketchSparkle";
@@ -779,13 +780,21 @@ export function Projects() {
         </div>
 
         <div className="mt-28 min-w-0 space-y-32 lg:col-span-12 lg:mt-36 lg:space-y-44">
-          {PROJECTS.map((project, index) => (
+          {PROJECTS.map((project, index) => {
+            const category = PROJECT_CATEGORIES.find((item) => item.projectIds[0] === project.id);
+            return (
             <Fragment key={project.id}>
               {index > 0 ? (
                 <HandDrawnDivider className="mb-28 ml-auto mr-auto h-4 w-[min(280px,72%)] -rotate-1 text-rule lg:mb-36" />
               ) : null}
 
               <article id={project.id} tabIndex={-1} className="min-w-0">
+                {category ? (
+                  <div id={category.id} tabIndex={-1} className="mb-24 scroll-mt-8 border-b border-rule pb-5 focus-visible:outline-1 focus-visible:outline-offset-8 focus-visible:outline-ink-faint lg:mb-32">
+                    <h2 className="font-editorial-cn text-[1.25rem] font-light tracking-[0.08em] text-ink-soft">{category.zh}</h2>
+                    <p className="mt-2 font-editorial text-[0.75rem] uppercase tracking-[0.18em] text-ink-faint">{category.en}</p>
+                  </div>
+                ) : null}
                 <div className="grid min-w-0 items-start gap-16 lg:grid-cols-12 lg:gap-10">
                   <div
                     className={[
@@ -814,7 +823,8 @@ export function Projects() {
                 <ProjectShowcase project={project} index={index} />
               </article>
             </Fragment>
-          ))}
+            );
+          })}
 
           <RoseLetterEntry />
         </div>
