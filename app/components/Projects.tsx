@@ -278,8 +278,8 @@ const PROJECTS: readonly Project[] = [
       en: "Product owner",
     },
     status: {
-      zh: "内测版本已完成，玩法仍在迭代",
-      en: "Internal build completed, core gameplay still evolving",
+      zh: "网页版可在线试玩，仍在持续完善",
+      en: "Available to play in your browser, with ongoing improvements",
     },
     intro: {
       zh: "《溪谷新芽》是一款短篇、低压力的 2D 农场经营游戏。我负责 MVP 范围、玩法规则、功能优先级和验收标准，并协调程序、美术、策划、音频与测试工作。生成式 AI 用于剧情草案、NPC 对话候选和美术概念参考，最终内容保留人工审核。",
@@ -292,6 +292,11 @@ const PROJECTS: readonly Project[] = [
       "农场经营、任务、探索、NPC 与存档等基础模块",
       "正在重做资源循环、经济系统和多路线经营策略",
     ],
+    live: {
+      href: "https://creek-sprout.vercel.app",
+      zh: "在线试玩《溪谷新芽》",
+      en: "Play Valley Sprout",
+    },
     poster: {
       src: assetPath("images/projects/valley-sprout-poster.jpg"),
       alt: "溪谷新芽项目海报：山谷农场中村民共同种植作物的复古绘本插画",
