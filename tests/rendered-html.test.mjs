@@ -161,6 +161,7 @@ test("ships the public REJOIN prototype without ChatGPT-hosted links", async () 
     "rejoin/index.rsc",
     "rejoin/favicon-rejoin.svg",
     "rejoin/images/ceramic-scene.jpg",
+    "rejoin/og.jpg",
   ]) {
     await access(new URL(file, publicRoot));
   }
@@ -170,6 +171,23 @@ test("ships the public REJOIN prototype without ChatGPT-hosted links", async () 
   assert.match(html, /(?:href|src)="\/rejoin\/_next\//);
   assert.match(html, /src="\/rejoin\/images\/ceramic-scene\.jpg"/);
   assert.doesNotMatch(html, /chatgpt\.site/);
+
+  const localAssets = [
+    ...html.matchAll(/\b(?:href|src)="(\/rejoin\/[^"#?\\]+)(?:[?#][^"]*)?"/g),
+  ].map((match) => match[1]);
+
+  assert.ok(
+    localAssets.some((asset) => asset.includes("/_next/static/css/")),
+    "REJOIN should load its exported stylesheet",
+  );
+  assert.ok(
+    localAssets.some((asset) => asset.includes("/_next/static/chunks/")),
+    "REJOIN should load its exported JavaScript chunks",
+  );
+
+  for (const asset of new Set(localAssets)) {
+    await access(new URL(asset.slice(1), publicRoot));
+  }
 });
 
 test("keeps Chinese and English together in the editorial copy", async () => {
