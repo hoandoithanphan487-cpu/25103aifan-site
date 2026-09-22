@@ -261,15 +261,7 @@ export function InteractivePortrait() {
           }
           className="mx-auto w-full max-w-[290px] sm:max-w-[400px] lg:max-w-[min(560px,62vh)]"
         >
-          <motion.div
-            animate={prefersReducedMotion ? undefined : { y: [0, -4, 0] }}
-            transition={
-              prefersReducedMotion
-                ? undefined
-                : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
-            }
-            className="relative"
-          >
+          <div className="relative">
             <div
               role="button"
               tabIndex={0}
@@ -304,7 +296,7 @@ export function InteractivePortrait() {
                 );
               })}
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
 

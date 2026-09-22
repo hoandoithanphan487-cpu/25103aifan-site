@@ -12,6 +12,9 @@
   --color-ink-soft: #4b4740;
   --color-ink-faint: #8d887e;
   --color-rule: #ded8cc;
+  --color-rule-strong: #cfc7ba;
+  --color-hero-muted: #746f67;
+  --color-coral: #b25543;
   --color-sea: #7b94a3;
   --color-sand: #c7b598;
 
@@ -19,6 +22,9 @@
   --font-editorial:
     "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
     "Times New Roman", serif;
+  --font-hero-display:
+    "Newsreader", "Iowan Old Style", Baskerville, "Baskerville Old Face",
+    "Palatino Linotype", "Book Antiqua", serif;
   --font-editorial-cn:
     "Noto Serif SC", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
 
